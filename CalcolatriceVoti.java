@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class CalcolatriceVoti {
     public static void main(String[] args) {
         Scanner keyb = new Scanner(System.in);
-        int numVoti=0;
+        int numVoti=0, numVotiSufficienti=0;
         double sommaVoti=0;
         double votoMin=Integer.MAX_VALUE, votoMax=Integer.MIN_VALUE;
         boolean numVotiValido=false;
@@ -45,6 +45,8 @@ public class CalcolatriceVoti {
 
                         if (voto > votoMax) votoMax = voto;
                         if (voto < votoMin) votoMin = voto;
+
+                        if (voto >= 6) numVotiSufficienti++;
                     }
                 } catch (Exception e) {
                     System.out.println("Hai inserito un voto non valido. Riprova.");
@@ -62,16 +64,18 @@ public class CalcolatriceVoti {
         else sufficiente = "Non hai raggiunto la sufficienza :(";
 
         System.out.println("---------------------");
+        System.out.println("STATISTICHE");
+        System.out.println("---------------------");
 
         // Stampa dei singoli voti
-        System.out.printf("Voti inseriti: ");
+        /*System.out.printf("Voti inseriti: ");
         for (int i=0; i<numVoti; i++) {
             System.out.printf("%.2f  ", voti[i]);
-        }
+        }*/
 
         // Stampa risultati a schermo
-        // System.out.printf("Numero di voti: %d\n", numVoti);
-        System.out.printf("\nMedia: %.2f - %s\n", mediaVoti, sufficiente);
+        System.out.printf("Media: %.2f - %s\n", mediaVoti, sufficiente);
+        System.out.printf("Voti sufficienti: %d su %d\n", numVotiSufficienti, numVoti);
         System.out.printf("Voto migliore: %.2f\n", votoMax);
         System.out.printf("Voto peggiore: %.2f\n", votoMin);
     }
