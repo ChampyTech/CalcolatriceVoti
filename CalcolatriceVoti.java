@@ -63,6 +63,9 @@ public class CalcolatriceVoti {
         else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
         else sufficiente = "Non hai raggiunto la sufficienza :(";
 
+        // Calcolo percentuale voti sufficienti
+        double percentualeSufficiente = ((double) numVotiSufficienti / numVoti) * 100;
+
         System.out.println("---------------------");
         System.out.println("STATISTICHE");
         System.out.println("---------------------");
@@ -75,7 +78,7 @@ public class CalcolatriceVoti {
 
         // Stampa risultati a schermo
         System.out.printf("Media: %.2f - %s\n", mediaVoti, sufficiente);
-        System.out.printf("Voti sufficienti: %d su %d\n", numVotiSufficienti, numVoti);
+        System.out.printf("Voti sufficienti: %d su %d (%.1f%%)\n", numVotiSufficienti, numVoti, percentualeSufficiente); // percentuale
         System.out.printf("Voto migliore: %.2f\n", votoMax);
         System.out.printf("Voto peggiore: %.2f\n", votoMin);
     }
