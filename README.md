@@ -9,4 +9,6 @@ Il codice sorgente è presente all'interno del file `.java`, mentre il bytecode 
 - Calcolo della quantità di voti sufficienti
 - Estrapolazione del voto migliore e del voto peggiore
 
+---
+
 Made by ChampyTech
