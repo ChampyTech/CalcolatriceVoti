@@ -55,6 +55,14 @@ public class CalcolatriceVoti {
         // Calcolo media
         double mediaVoti = sommaVoti / numVoti;
 
+        // Sufficiente
+        String sufficiente = "";
+        if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! :)";
+        else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
+        else sufficiente = "Non hai raggiunto la sufficienza :(";
+
+        System.out.println("---------------------");
+
         // Stampa dei singoli voti
         System.out.printf("Voti inseriti: ");
         for (int i=0; i<numVoti; i++) {
@@ -63,7 +71,7 @@ public class CalcolatriceVoti {
 
         // Stampa risultati a schermo
         // System.out.printf("Numero di voti: %d\n", numVoti);
-        System.out.printf("\nMedia: %.2f\n", mediaVoti);
+        System.out.printf("\nMedia: %.2f - %s\n", mediaVoti, sufficiente);
         System.out.printf("Voto migliore: %.2f\n", votoMax);
         System.out.printf("Voto peggiore: %.2f\n", votoMin);
     }
