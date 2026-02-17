@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class CalcolatriceVoti {
     public static void main(String[] args) {
         Scanner keyb = new Scanner(System.in);
-        int numVoti=0, numVotiSufficienti=0;
+        int numVoti=0, numVotiSufficienti=0, numVotiInsufficienti=0;
         double sommaVoti=0;
         double votoMin=Integer.MAX_VALUE, votoMax=Integer.MIN_VALUE;
         boolean numVotiValido=false;
@@ -47,6 +47,7 @@ public class CalcolatriceVoti {
                         if (voto < votoMin) votoMin = voto;
 
                         if (voto >= 6) numVotiSufficienti++;
+                        else numVotiInsufficienti++;
                     }
                 } catch (Exception e) {
                     System.out.println("Hai inserito un voto non valido. Riprova.");
@@ -58,28 +59,34 @@ public class CalcolatriceVoti {
         double mediaVoti = sommaVoti / numVoti;
 
         // Sufficiente
-        String sufficiente = "";
-        if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! :)";
-        else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
-        else sufficiente = "Non hai raggiunto la sufficienza :(";
+        /*
+            String sufficiente = "";
+            if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! :)";
+            else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
+            else sufficiente = "Non hai raggiunto la sufficienza :(";
+         */
 
-        // Calcolo percentuale voti sufficienti
+        // Calcolo percentuale voti sufficienti e insufficienti
         double percentualeSufficiente = ((double) numVotiSufficienti / numVoti) * 100;
+        double percentualeInsufficiente = 100 - percentualeSufficiente;
 
-        System.out.println("---------------------");
-        System.out.println("STATISTICHE");
-        System.out.println("---------------------");
+        System.out.println("-------------------------------");
+        System.out.println("          STATISTICHE          ");
+        System.out.println("-------------------------------");
 
         // Stampa dei singoli voti
-        /*System.out.printf("Voti inseriti: ");
-        for (int i=0; i<numVoti; i++) {
-            System.out.printf("%.2f  ", voti[i]);
-        }*/
+        /*
+            System.out.printf("Voti inseriti: ");
+            for (int i=0; i<numVoti; i++) {
+                System.out.printf("%.2f  ", voti[i]);
+            }
+        */
 
         // Stampa risultati a schermo
-        System.out.printf("Media: %.2f - %s\n", mediaVoti, sufficiente);
-        System.out.printf("Voti sufficienti: %d su %d (%.1f%%)\n", numVotiSufficienti, numVoti, percentualeSufficiente); // percentuale
-        System.out.printf("Voto migliore: %.2f\n", votoMax);
-        System.out.printf("Voto peggiore: %.2f\n", votoMin);
+        System.out.printf("%-20s %10.2f\n", "Media", mediaVoti);
+        System.out.printf("%-20s %10d (%.1f%%)\n", "Voti sufficienti", numVotiSufficienti, percentualeSufficiente);
+        System.out.printf("%-20s %10d (%.1f%%)\n", "Voti insufficienti", numVotiSufficienti, percentualeInsufficiente);
+        System.out.printf("%-20s %10.2f\n", "Voto migliore", votoMax);
+        System.out.printf("%-20s %10.2f\n", "Voto peggiore", votoMin);
     }
 }
