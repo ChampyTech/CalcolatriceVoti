@@ -5,7 +5,7 @@ public class CalcolatriceVoti {
         Scanner keyb = new Scanner(System.in);
         int numVoti=0, numVotiSufficienti=0, numVotiInsufficienti=0;
         double sommaVoti=0;
-        double votoMin=Integer.MAX_VALUE, votoMax=Integer.MIN_VALUE;
+        double votoMin=10, votoMax=0;
         boolean numVotiValido=false;
 
         // Richiesta numero voti
@@ -23,7 +23,7 @@ public class CalcolatriceVoti {
         } while (!numVotiValido);
 
         // Crea un array per i voti
-        double[] voti = new double[numVoti];
+        // double[] voti = new double[numVoti];
 
         // Richiesta dei voti
         for (int i=0; i<numVoti; i++) {
@@ -40,7 +40,7 @@ public class CalcolatriceVoti {
                     if (voto < 0 || voto > 10) System.out.println("Hai inserito un voto non compreso nell'intervallo ammesso (0-10). Riprova.");
                     else {
                         votoValido = true;
-                        voti[i] = voto;
+                        
                         sommaVoti += voto; // Calcolo della somma
 
                         if (voto > votoMax) votoMax = voto;
