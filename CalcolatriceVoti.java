@@ -93,6 +93,7 @@ public class CalcolatriceVoti {
         // Stampa risultati a schermo
         System.out.printf("%-20s %10.2f\n", "Media", mediaVoti);
         System.out.printf("%-20s %10.2f\n", "Mediana", medianaVoti);
+        System.out.printf("%-20s %10d\n", "Voti totali", numVoti);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti sufficienti", numVotiSufficienti, percentualeSufficiente);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti insufficienti", numVotiInsufficienti, percentualeInsufficiente);
         System.out.printf("%-20s %10.2f\n", "Voto migliore", votoMax);
