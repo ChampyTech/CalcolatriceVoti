@@ -72,7 +72,7 @@ public class CalcolatriceVoti {
         String sufficiente;
         if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! ;)";
         else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
-        else sufficiente = "Non hai raggiunto la sufficienza :(";
+        else sufficiente = "Non hai raggiunto la sufficienza :(\nPer arrivare alla media del 6 nel prossimo compito devi prendere minimo " + ((6 * (numVoti + 1)) - sommaVoti);
 
         // Calcolo percentuale voti sufficienti e insufficienti
         double percentualeSufficiente = ((double) numVotiSufficienti / numVoti) * 100;
