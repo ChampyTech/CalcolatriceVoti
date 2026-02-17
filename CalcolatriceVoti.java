@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CalcolatriceVoti {
@@ -23,7 +24,7 @@ public class CalcolatriceVoti {
         } while (!numVotiValido);
 
         // Crea un array per i voti
-        // double[] voti = new double[numVoti];
+        double[] voti = new double[numVoti];
 
         // Richiesta dei voti
         for (int i=0; i<numVoti; i++) {
@@ -40,7 +41,9 @@ public class CalcolatriceVoti {
                     if (voto < 0 || voto > 10) System.out.println("Hai inserito un voto non compreso nell'intervallo ammesso (0-10). Riprova.");
                     else {
                         votoValido = true;
-                        
+
+                        voti[i] = voto;
+
                         sommaVoti += voto; // Calcolo della somma
 
                         if (voto > votoMax) votoMax = voto;
@@ -57,6 +60,13 @@ public class CalcolatriceVoti {
 
         // Calcolo media
         double mediaVoti = sommaVoti / numVoti;
+
+        Arrays.sort(voti);
+
+        // Calcolo mediana
+        double medianaVoti;
+        if (numVoti % 2 == 0) medianaVoti = (voti[numVoti/2 - 1] + voti[numVoti/2]) / 2;
+        else medianaVoti = voti[numVoti/2];
 
         // Sufficiente
         /*
@@ -84,6 +94,7 @@ public class CalcolatriceVoti {
 
         // Stampa risultati a schermo
         System.out.printf("%-20s %10.2f\n", "Media", mediaVoti);
+        System.out.printf("%-20s %10.2f\n", "Mediana", medianaVoti);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti sufficienti", numVotiSufficienti, percentualeSufficiente);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti insufficienti", numVotiInsufficienti, percentualeInsufficiente);
         System.out.printf("%-20s %10.2f\n", "Voto migliore", votoMax);
