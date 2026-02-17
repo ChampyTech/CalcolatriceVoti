@@ -69,12 +69,10 @@ public class CalcolatriceVoti {
         else medianaVoti = voti[numVoti/2];
 
         // Sufficiente
-        /*
-            String sufficiente = "";
-            if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! :)";
-            else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
-            else sufficiente = "Non hai raggiunto la sufficienza :(";
-         */
+        String sufficiente;
+        if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! ;)";
+        else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
+        else sufficiente = "Non hai raggiunto la sufficienza :(";
 
         // Calcolo percentuale voti sufficienti e insufficienti
         double percentualeSufficiente = ((double) numVotiSufficienti / numVoti) * 100;
@@ -99,5 +97,6 @@ public class CalcolatriceVoti {
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti insufficienti", numVotiInsufficienti, percentualeInsufficiente);
         System.out.printf("%-20s %10.2f\n", "Voto migliore", votoMax);
         System.out.printf("%-20s %10.2f\n", "Voto peggiore", votoMin);
+        System.out.printf("\n%s\n", sufficiente);
     }
 }
