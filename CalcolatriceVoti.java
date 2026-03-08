@@ -1,72 +1,66 @@
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class CalcolatriceVoti {
     public static void main(String[] args) {
         Scanner keyb = new Scanner(System.in);
-        int numVoti=0, numVotiSufficienti=0, numVotiInsufficienti=0;
-        double sommaVoti=0;
-        double votoMin=10, votoMax=0;
-        boolean numVotiValido=false;
+        int numVotiSufficienti=0, numVotiInsufficienti=0;
+        double sommaVoti=0, votoMin=10, votoMax=0;
 
-        // Richiesta numero voti
-        do {
+        // Array per i voti
+        ArrayList<Double> voti = new ArrayList<>();
+
+        // Acquisizione voti
+        while (true) {
+            System.out.println("Inserisci un voto (X per terminare): ");
+            String input = keyb.nextLine();
+
+            // Se è "X" esci
+            if (input.equalsIgnoreCase("X")) break;
+
             try {
-                System.out.println("Quanti voti vuoi inserire? ");
-                numVoti = Integer.parseInt(keyb.nextLine());
+                double voto =  Double.parseDouble(input);
 
-                // Controllo numero voti
-                if (numVoti <= 0) System.out.println("Hai inserito un numero negativo o nullo. Riprova.");
-                else numVotiValido = true;
-            } catch (Exception e){
-                System.out.println("Hai inserito un numero non valido. Riprova.");
-            }
-        } while (!numVotiValido);
+                // Controllo voto
+                if (voto < 0 || voto > 10) {
+                    System.out.println("Hai inserito un voto non valido (0-10).");
+                } else {
+                    voti.add(voto);
 
-        // Crea un array per i voti
-        double[] voti = new double[numVoti];
+                    sommaVoti += voto; // Calcolo della somma
 
-        // Richiesta dei voti
-        for (int i=0; i<numVoti; i++) {
-            double voto=0;
-            boolean votoValido=false;
+                    if (voto > votoMax) votoMax = voto;
+                    if (voto < votoMin) votoMin = voto;
 
-            do {
-                try {
-                    // Richiesta voto
-                    System.out.println("Inserisci il " + (i+1) + "° voto: ");
-                    voto = Double.parseDouble(keyb.nextLine());
-
-                    // Controllo voto
-                    if (voto < 0 || voto > 10) System.out.println("Hai inserito un voto non compreso nell'intervallo ammesso (0-10). Riprova.");
-                    else {
-                        votoValido = true;
-
-                        voti[i] = voto;
-
-                        sommaVoti += voto; // Calcolo della somma
-
-                        if (voto > votoMax) votoMax = voto;
-                        if (voto < votoMin) votoMin = voto;
-
-                        if (voto >= 6) numVotiSufficienti++;
-                        else numVotiInsufficienti++;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Hai inserito un voto non valido. Riprova.");
+                    if (voto >= 6) numVotiSufficienti++;
+                    else numVotiInsufficienti++;
                 }
-            } while (!votoValido);
+            } catch (Exception e) {
+                System.out.println("Hai inserito un valore non valido. Riprova.");
+            }
+        }
+
+        // Numero voti
+        int numVoti = voti.size();
+
+        // Se non è stato inserito nessun voto
+        if (numVoti == 0) {
+            System.out.println("Non hai inserito nessun voto.");
+            return;
         }
 
         // Calcolo media
         double mediaVoti = sommaVoti / numVoti;
 
-        Arrays.sort(voti);
+        // Ordina l'array di voti dal più piccolo al più grande
+        Collections.sort(voti);
 
         // Calcolo mediana
         double medianaVoti;
-        if (numVoti % 2 == 0) medianaVoti = (voti[numVoti/2 - 1] + voti[numVoti/2]) / 2;
-        else medianaVoti = voti[numVoti/2];
+        if (numVoti % 2 == 0) medianaVoti = (voti.get(numVoti/2 - 1) + voti.get(numVoti/2)) / 2;
+        else medianaVoti = voti.get(numVoti/2);
 
         // Sufficiente
         String sufficiente;
@@ -82,14 +76,6 @@ public class CalcolatriceVoti {
         System.out.println("          STATISTICHE          ");
         System.out.println("-------------------------------");
 
-        // Stampa dei singoli voti
-        /*
-            System.out.printf("Voti inseriti: ");
-            for (int i=0; i<numVoti; i++) {
-                System.out.printf("%.2f  ", voti[i]);
-            }
-        */
-
         // Stampa risultati a schermo
         System.out.printf("%-20s %10.2f\n", "Media", mediaVoti);
         System.out.printf("%-20s %10.2f\n", "Mediana", medianaVoti);
@@ -99,5 +85,7 @@ public class CalcolatriceVoti {
         System.out.printf("%-20s %10.2f\n", "Voto migliore", votoMax);
         System.out.printf("%-20s %10.2f\n", "Voto peggiore", votoMin);
         System.out.printf("\n%s\n", sufficiente);
+
+        keyb.close();
     }
 }
