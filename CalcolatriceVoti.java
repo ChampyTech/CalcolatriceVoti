@@ -62,11 +62,14 @@ public class CalcolatriceVoti {
         if (numVoti % 2 == 0) medianaVoti = (voti.get(numVoti/2 - 1) + voti.get(numVoti/2)) / 2;
         else medianaVoti = voti.get(numVoti/2);
 
+        // Voto necessario per essere sufficiente
+        double votoNecessario = (6 * (numVoti + 1)) - sommaVoti;
+
         // Sufficiente
         String sufficiente;
         if (mediaVoti > 5.5 && mediaVoti < 6) sufficiente = "Hai quasi raggiunto la sufficienza. Continua così! ;)";
         else if (mediaVoti >= 6) sufficiente = "Bravo! Sei sufficiente :)";
-        else sufficiente = "Non hai raggiunto la sufficienza :(\nPer arrivare alla media del 6 nel prossimo compito devi prendere minimo " + ((6 * (numVoti + 1)) - sommaVoti);
+        else sufficiente = String.format("Non hai raggiunto la sufficienza :(\nPer arrivare alla media del 6 nel prossimo compito devi prendere minimo %.2f", votoNecessario);
 
         // Calcolo percentuale voti sufficienti e insufficienti
         double percentualeSufficiente = ((double) numVotiSufficienti / numVoti) * 100;
