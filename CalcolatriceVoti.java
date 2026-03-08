@@ -62,6 +62,11 @@ public class CalcolatriceVoti {
         if (numVoti % 2 == 0) medianaVoti = (voti.get(numVoti/2 - 1) + voti.get(numVoti/2)) / 2;
         else medianaVoti = voti.get(numVoti/2);
 
+        // Deviazione standard
+        double sommaScarti = 0;
+        for (double v : voti) sommaScarti += Math.pow(v - mediaVoti, 2);
+        double deviazioneStandard = Math.sqrt(sommaScarti / numVoti);
+
         // Voto necessario per essere sufficiente
         double votoNecessario = (6 * (numVoti + 1)) - sommaVoti;
 
@@ -82,6 +87,7 @@ public class CalcolatriceVoti {
         // Stampa risultati a schermo
         System.out.printf("%-20s %10.2f\n", "Media", mediaVoti);
         System.out.printf("%-20s %10.2f\n", "Mediana", medianaVoti);
+        System.out.printf("%-20s %10.2f\n", "Deviazione standard", deviazioneStandard);
         System.out.printf("%-20s %10d\n", "Voti totali", numVoti);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti sufficienti", numVotiSufficienti, percentualeSufficiente);
         System.out.printf("%-20s %10d (%.1f%%)\n", "Voti insufficienti", numVotiInsufficienti, percentualeInsufficiente);
